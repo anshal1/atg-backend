@@ -40,7 +40,7 @@ post_router.post("/share/image", FetchUser, upload.single("image"), async (req, 
     }
 })
 
-post_router.get("/all/post", async (req, res) => {
+post_router.post("/all/post", async (req, res) => {
     try {
         let page = req.query.page;
         const limit = req.query.limit;
