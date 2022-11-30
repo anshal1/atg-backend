@@ -94,7 +94,7 @@ user_router.post("/forgot/password", async (req, res) => {
             from: `'Anshal Patel' ${process.env.email}`,
             to: find_user.email,
             subject: "Reset Password",
-            html: `<h1>Reset your password <br/> <a href='${`http://localhost:3000/reset/password/token=${forget_token.toString()}`}' target='_blank'>Click Here</a></h1>`
+            html: `<h1>Reset your password <br/> <a href='${`https://atg-backend-s-frontend.vercel.app/reset/password/token=${forget_token.toString()}`}' target='_blank'>Click Here</a></h1>`
         }
         transport.sendMail(options, (err, info) => {
             if (err) {
