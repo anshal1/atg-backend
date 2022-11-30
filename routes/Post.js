@@ -51,21 +51,21 @@ post_router.post("/all/post", async (req, res) => {
                 error: "Image Not Found"
             })
         }
-        // Fetching limited amout of images
+        // Fetching limited amount of images
         const allImage = await ImageUpload.find({}).limit(limit).skip(limit * (page - 1));
-
         // Checking if next page exists or not
         // If the allImage returns the data whose length is equal to limit then there might be a chance that there are more data
         // So we will fetch data on the second page to check if next page exists or not
-        if (allImage.length === limit) {
+        if (allImage.length === parseInt(limit)) {
             // Don't need to fetch all data just fetch one data to check if next page exists if yes then user will request this url again and we will check again
-            const Check = await ImageUpload.find({}).limit(1).skip(limit * (page + 1));
+            const Check = await ImageUpload.find({}).limit(1).skip(limit * (page));
+            console.log(Check);
             if (Check.length < 1) {
                 isNextPage = false;
             } else {
                 isNextPage = true;
             }
-        } else if (allImage.length < limit) {
+        } else {
             isNextPage = false;
         }
         res.json({
